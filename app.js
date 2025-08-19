@@ -6,11 +6,11 @@ const port = 3000
 
 try {
     const connection = await mysql.createConnection({
-    host: 'mysql-nulz',
+    host: 'mysql-k8al',
     port: 3306,
     user: 'elijah',
     password: process.env.DB_PASSWORD,
-    database: 'school'
+    database: ''
   });
   const sql = 'SELECT `id`,`latitude`,`longitude` FROM `school_list`'
   const [rows, fields] = await connection.query(sql);
