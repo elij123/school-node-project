@@ -10,7 +10,7 @@ try {
     port: 3306,
     user: 'elijah',
     password: process.env.DB_PASSWORD,
-    database: ''
+    database: 'mysql'
   });
   const sql = 'SELECT `id`,`latitude`,`longitude` FROM `school_list`'
   const [rows, fields] = await connection.query(sql);
