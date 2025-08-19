@@ -10,7 +10,8 @@ const connection = mysql.createConnection({
     port: 3306,
     user: "elijah",
     password: process.env.DB_PASSWORD,
-    database: "school"
+    database: "school",
+    insecureAuth: true
 })
 
 connection.connect()
