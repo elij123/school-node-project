@@ -6,7 +6,7 @@ let connection = null
 
 const schema = Joi.object({
     name: Joi.string()
-    .pattern(new RegExp("^[a-zA-Z\.\, ]*$"))
+    .pattern(new RegExp("^[a-zA-Z\. ]*$"))
     .required(),
 
     address: Joi.string()
