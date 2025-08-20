@@ -66,6 +66,7 @@ app.get("/listSchools", async (req,res) => {
         return {id:obj.id,distance:calculate_distance(user_lat,user_long,obj.latitude,obj.longitude)}
     })
     distance_list.sort((dist1,dist2) => dist1.distance-dist2.distance)
+    console.log(distance_list)
         const result = distance_list.map(async (obj) => {
         const item = await connection.execute(sql_result,[obj.id])[0]
         return item
