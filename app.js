@@ -90,7 +90,7 @@ app.post("/addSchool", async (req,res) => {
         const [result] = await connection.execute(sql_insert, sql_values);
         res.status(200)
     } catch (error) {
-        res.status(500).send(error.code)
+        res.status(500).send(error["code"])
     }
 })
 
