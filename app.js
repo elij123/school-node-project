@@ -71,6 +71,7 @@ app.get("/listSchools", async (req,res) => {
         const [rows] = await connection.execute(sql_result,[obj.id])
         result.push(rows[0])
     })
+    console.log(result)
     res.send(result)
 })
 
