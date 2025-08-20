@@ -4,7 +4,7 @@ import Joi from "joi"
 
 const schema = Joi.object({
     name: Joi.string()
-    .pattern(new RegExp("^[a-zA-Z]*$","g"))
+    .pattern(new RegExp("^[a-zA-Z]*$"))
     .required(),
 
     address: Joi.string()
