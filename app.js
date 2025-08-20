@@ -71,7 +71,7 @@ app.get("/listSchools", async (req,res) => {
     distance_list.map(async (obj) => {
         const [rows] = await connection.execute(sql_result,[obj.id])
         console.log(obj.id)
-        console.log(rows)
+        console.log(rows[0])
     })
     res.send(result)
 })
