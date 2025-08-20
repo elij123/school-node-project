@@ -61,25 +61,16 @@ app.get("/listSchools", async (req,res) => {
     const user_long = req.query.longitude
     const sql = 'SELECT `id`,`latitude`,`longitude` FROM `school_list`'
     const sql_result = 'SELECT * FROM `school_list` WHERE `id`= ?'
-    try {
-        const [rows] = await connection.query(sql);
-    } catch (error) {
-        console.log(error)
-        res.status(500).send(error)
-    }
+    const [rows] = await connection.query(sql);
     const distance_list = rows.map((obj) => {
         return {id:obj.id,distance:calculate_distance(user_lat,user_long,obj.latitude,obj.longitude)}
     })
     distance_list.sort((dist1,dist2) => dist1.distance-dist2.distance)
-    try {
         const result = distance_list.map(async (obj) => {
         const item = await connection.execute(sql_result,[obj.id])[0]
         return item
     })
     res.send(result)
-    } catch (error) {
-        res.status(501).send(error)
-    }
 })
 
 app.post("/addSchool", async (req,res) => {
@@ -94,7 +85,7 @@ app.post("/addSchool", async (req,res) => {
         res.status(400).send(error)
     }
     const sql_insert = 'INSERT INTO `school_list` (`name`,`address`,`latitude`,`longitude`) VALUES (?, ?, ?, ?)'
-    const sql_values = [name,address,latitude,longitude]
+    const sql_values = [req.body.name,req.body.address,req.body.latitude,req.body.longitude]
     try {
         const [result] = await connection.execute(sql_insert, sql_values);
         res.send(result)
