@@ -59,20 +59,18 @@ catch (error) {
 app.get("/listSchools", async (req,res) => {
     const user_lat= req.query.latitude
     const user_long = req.query.longitude
-    const sql = 'SELECT `id`,`latitude`,`longitude` FROM `school_list`'
-    const sql_result = 'SELECT * FROM `school_list` WHERE `id`= ?'
+    const sql = 'SELECT `name`,`address`,`latitude`,`longitude` FROM `school_list`'
     const [rows] = await connection.query(sql);
     const distance_list = rows.map((obj) => {
-        return {id:obj.id,distance:calculate_distance(user_lat,user_long,obj.latitude,obj.longitude)}
-    })
+        return {
+            name:obj.name,
+            address:obj.address,
+            latitude:obj.latitude,
+            longitude:obj.longitude,
+            distance:`${calculate_distance(user_lat,user_long,obj.latitude,obj.longitude)} km`}
+        })
     distance_list.sort((dist1,dist2) => dist1.distance-dist2.distance)
-    const result = []
-    distance_list.map(async (obj) => {
-        const [rows] = await connection.execute(sql_result,[obj.id])
-        result.push(rows[0])
-    })
-    console.log(result)
-    res.send(result)
+    res.send(distance_list)
 })
 
 app.post("/addSchool", async (req,res) => {
