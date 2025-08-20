@@ -40,7 +40,7 @@ const calculate_distance = (lat1,long1,lat2,long2) => {
 
     const d = R * c
 
-    return (d/1000)
+    return (d/1000).toFixed(2)
 }
 
 try {
