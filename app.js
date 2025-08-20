@@ -82,15 +82,15 @@ app.post("/addSchool", async (req,res) => {
         longitude: req.body.longitude
     })
     } catch (error) {
-        res.status(400)
+        res.sendStatus(400)
     }
     const sql_insert = 'INSERT INTO `school_list` (`name`,`address`,`latitude`,`longitude`) VALUES (?, ?, ?, ?)'
     const sql_values = [req.body.name,req.body.address,req.body.latitude,req.body.longitude]
     try {
         const [result] = await connection.execute(sql_insert, sql_values);
-        res.status(200)
+        res.sendStatus(200)
     } catch (error) {
-        res.status(500)
+        res.sendStatus(500)
     }
 })
 
