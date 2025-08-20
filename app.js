@@ -26,6 +26,7 @@ const port = process.env.PORT || 4000
 
 app.use(express.urlencoded())
 
+// Haversine script by Chris Veness under MIT License
 const calculate_distance = (lat1,long1,lat2,long2) => {
     const R = 6371e3
     const phi1 = lat1 * (Math.PI/180)
@@ -42,6 +43,7 @@ const calculate_distance = (lat1,long1,lat2,long2) => {
 
     return (d/1000).toFixed(2)
 }
+// END
 
 try {
     connection = await mysql.createConnection({
