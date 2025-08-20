@@ -65,11 +65,9 @@ app.get("/listSchools", async (req,res) => {
         return {
             name:obj.name,
             address:obj.address,
-            latitude:obj.latitude,
-            longitude:obj.longitude,
-            distance:`${calculate_distance(user_lat,user_long,obj.latitude,obj.longitude)} km`}
-        })
-    distance_list.sort((dist1,dist2) => dist1.distance-dist2.distance)
+            distance_km:calculate_distance(user_lat,user_long,obj.latitude,obj.longitude)
+        }})
+    distance_list.sort((dist1,dist2) => dist1.distance_km-dist2.distance_km)
     res.send(distance_list)
 })
 
