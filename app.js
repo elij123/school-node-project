@@ -2,6 +2,8 @@ import express from "express"
 import mysql from "mysql2/promise"
 import Joi from "joi"
 
+let connection = null
+
 const schema = Joi.object({
     name: Joi.string()
     .pattern(new RegExp("^[a-zA-Z]*$"))
@@ -42,15 +44,15 @@ const calculate_distance = (lat1,long1,lat2,long2) => {
 }
 
 try {
-    const connection = await mysql.createConnection({
+    connection = await mysql.createConnection({
     host: 'mysql-k8al',
     port: 3306,
     user: 'elijah',
     password: process.env.DB_PASSWORD,
     database: 'school'
     });
-    } 
-    catch (error) {
+} 
+catch (error) {
     console.log(error);
 }
 
