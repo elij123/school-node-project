@@ -22,7 +22,7 @@ const schema = Joi.object({
 .with("name",["address","latitude","longitude"])
 
 const app = express()
-const port = 3000
+const port = process.env.PORT || 4000
 
 app.use(express.urlencoded())
 
